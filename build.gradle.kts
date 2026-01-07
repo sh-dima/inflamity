@@ -1,9 +1,9 @@
-//import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 import com.undefinedcreations.nova.ServerType
 
 plugins {
     alias(libs.plugins.kotlin)
-//    alias(libs.plugins.shadow)
+    alias(libs.plugins.shadow)
 
     alias(libs.plugins.paper)
     alias(libs.plugins.nova)
@@ -17,9 +17,8 @@ repositories {
 
 dependencies {
     library(kotlin("stdlib"))
-//    library(libs.commands)
-//    library(libs.config)
-//    implementation(libs.metrics)
+    library(libs.config)
+    implementation(libs.metrics)
 
     paperweight.paperDevBundle("1.21.8-R0.1-SNAPSHOT")
 }
@@ -30,7 +29,7 @@ java {
     }
 }
 
-group = "org.example"
+group = "io.gitlab.shdima"
 
 version = ProcessBuilder("git", "describe", "--tags", "--always", "--dirty")
     .directory(project.projectDir)
@@ -129,27 +128,26 @@ tasks {
         }
     }
 
-//    withType<ShadowJar> {
-//        from("assets/text/licenses") {
-//            into("licenses")
-//        }
-//
-//        archiveClassifier = ""
-//
-//        enableAutoRelocation = true
-//        relocationPrefix = "${project.group}.${project.name}.dependencies"
-//
-//        minimizeJar = true
-//    }
-//
-//    jar {
-//        enabled = false
-//    }
+    withType<ShadowJar> {
+        from("assets/text/licenses") {
+            into("licenses")
+        }
+
+        archiveClassifier = ""
+
+        enableAutoRelocation = true
+        relocationPrefix = "${project.group}.${project.name}.dependencies"
+
+        minimizeJar = true
+    }
+
+    jar {
+        enabled = false
+    }
 }
 
 listOf(
-//    tasks.shadowJar,
-    tasks.jar,
+    tasks.shadowJar,
     tasks.kotlinSourcesJar,
 ).forEach {
     it {
@@ -159,10 +157,10 @@ listOf(
 }
 
 bukkit {
-    name = "Template"
-    description = "A template for Minecraft Paper plugins"
+    name = "Inflamity"
+    description = "A Minecraft plugin that updates the way fire works and makes it much more powerful."
 
-    main = "$group.${project.name}.Plugin"
+    main = "$group.${project.name}.$name"
     apiVersion = "1.20.6"
     version = project.version.toString()
 
@@ -170,5 +168,5 @@ bukkit {
         "Esoteric Enderman"
     )
 
-    website = "https://gitlab.com/esoteric-templates/templates/template-minecraft-plugin"
+    website = "https://gitlab.com/-/p/77544986"
 }

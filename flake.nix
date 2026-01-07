@@ -1,5 +1,5 @@
 {
-	description = "A template repository for Minecraft plugins";
+	description = "A Minecraft plugin that updates the way fire works and makes it much more powerful.";
 
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
